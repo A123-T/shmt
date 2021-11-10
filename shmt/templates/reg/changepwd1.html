@@ -1,0 +1,45 @@
+{% load static %}
+<html>
+<head>	
+<title>	Change-Password__form</title>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+<div class="main">
+<div class="register"> 
+<h2>Change Password: {{name}}</h2>
+<fieldset>
+
+<h4 align="center ">
+{% if messages %}
+{% for message in messages %}
+<b {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</b>
+{% endfor %}
+{% endif %}
+{% if form.non_field_errors %}
+ {% for error in form.non_field_errors %}
+  {{error}}
+ {% endfor %}
+{% endif %}
+</h4>
+</fieldset>
+<hr>
+<br>
+</fieldset>
+<form action=""  id="register"  method="post" novalidate>
+{% csrf_token %}
+
+{% for fm in form %}
+    {{fm.label_tag}}  {{fm}}<br>
+<small class = "error"> {{fm.errors|striptags}} </small><br>
+{% endfor %}
+<input type="submit" value="submit" id="submit" name="submit">
+<br><br>
+
+<a href="{% url 'logout' %}"> Log out!!!</a><br>
+<a href="{% url 'profile' %}"> Profile !!!</a><br>
+</form>
+</div>
+</div>
+</body>
+</html>
